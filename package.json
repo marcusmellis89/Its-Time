@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/marcusmellis89/Its-Time/issues"
   },
-  "homepage": "https://github.com/marcusmellis89/Its-Time#readme"
+  "homepage": "https://github.com/marcusmellis89/Its-Time#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
