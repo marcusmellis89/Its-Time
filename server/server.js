@@ -10,7 +10,6 @@ var dbConfig = {
 	connection: {
 		host: 'localhost',
 		user: 'root',
-		port: port,
 		database: 'fight_historian',
 		charset: 'utf8'
 	}
@@ -28,10 +27,19 @@ app.use(allowCrossDomain);
 app.use(bodyParser.urlencoded({'extended':'true'}));
 app.use(bodyParser.json());
 
-
-
 app.use('/',function(req,res){
 	res.send('hello world')
+});
+
+bookshelf.knex.schema.hasTable('fighters').then(function(exists,err){
+	if(!exists){
+		bookshelf.knex.schema.createTable('fighters', function(fighter){
+			fighter.increments('id').primary();
+			fighter.string('name', 100).unique();
+		}).then(function(table){
+			console.log('Created fighter table!');
+		})
+	}
 });
 
 app.listen(port,function(){
